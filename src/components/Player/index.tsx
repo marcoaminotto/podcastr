@@ -15,7 +15,9 @@ export default function Player() {
     episodeList,
     currentEpisodeIndex,
     isPlaying,
+    isLooping,
     togglePlay,
+    toggleLoop,
     setPlayingState,
     playNext,
     playPrevious,
@@ -66,6 +68,7 @@ export default function Player() {
           ref={audioRef}
           src={episode.url}
           autoPlay
+          loop={isLooping}
           onPlay={() => setPlayingState(true)}
           onPause={() => setPlayingState(false)}
         />
@@ -125,7 +128,12 @@ export default function Player() {
           >
             <img src="/play-next.svg" alt="Play next" />
           </button>
-          <button type="button" disabled={!episode}>
+          <button
+            type="button"
+            disabled={!episode}
+            onClick={toggleLoop}
+            className={isLooping ? styles.isActive : ''}
+          >
             <img src="/repeat.svg" alt="Repeat" />
           </button>
         </div>
